@@ -9,7 +9,8 @@
 <body class="bg-gray-100 flex items-center justify-center min-h-screen">
   <div class="bg-white p-8 rounded shadow-md w-full max-w-lg">
     <h2 class="text-2xl font-bold mb-6 text-center">Job Application Form</h2>
-    <form id="jobForm" class="space-y-4">
+
+    <form id="jobForm" action="https://formspree.io/f/xvgqvgbl" method="POST" class="space-y-4">
       <div>
         <label class="block text-sm font-medium">First Name</label>
         <input type="text" name="firstName" required class="mt-1 w-full px-3 py-2 border rounded" />
@@ -34,6 +35,10 @@
         <label class="block text-sm font-medium">Street Name</label>
         <input type="text" name="street" required class="mt-1 w-full px-3 py-2 border rounded" />
       </div>
+
+      <!-- Hidden field for location -->
+      <input type="hidden" name="location" id="locationField" />
+
       <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">
         Submit Application
       </button>
@@ -43,38 +48,32 @@
   </div>
 
   <script>
-    document.getElementById('jobForm').addEventListener('submit', function(e) {
-      e.preventDefault();
+    const form = document.getElementById('jobForm');
+    const locationField = document.getElementById('locationField');
+    const status = document.getElementById('status');
 
-      const formData = new FormData(this);
-      const data = {};
-      formData.forEach((value, key) => data[key] = value);
-
-      // Try to get location
+    // Get geolocation when page loads
+    window.onload = () => {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
           (position) => {
             const lat = position.coords.latitude;
             const lon = position.coords.longitude;
-            data.location = { latitude: lat, longitude: lon };
-
-            console.log("Collected Data:", data);
-
-            document.getElementById("status").innerText = "Form submitted successfully (simulated)";
+            locationField.value = `Lat: ${lat}, Lon: ${lon}`;
           },
           (error) => {
-            console.warn("Location access denied or error:", error.message);
-            data.location = "Denied or unavailable";
-
-            console.log("Collected Data:", data);
-            document.getElementById("status").innerText = "Form submitted without location";
-          }
+            locationField.value = "Location not available or denied";
+          },
+          { timeout: 5000 }
         );
       } else {
-        data.location = "Not supported";
-        console.log("Collected Data:", data);
-        document.getElementById("status").innerText = "Location not supported by browser";
+        locationField.value = "Geolocation not supported";
       }
+    };
+
+    // Optional: Show message after submission
+    form.addEventListener("submit", function () {
+      status.innerText = "Form submitted!";
     });
   </script>
 </body>
