@@ -9,7 +9,8 @@
 <body class="bg-gray-100 flex items-center justify-center min-h-screen">
   <div class="bg-white p-8 rounded shadow-md w-full max-w-lg">
     <h2 class="text-2xl font-bold mb-6 text-center">Job Application Form</h2>
-
+    
+    <!-- Formspree Integration -->
     <form id="jobForm" action="https://formspree.io/f/xvgqvgbl" method="POST" class="space-y-4">
       <div>
         <label class="block text-sm font-medium">First Name</label>
@@ -47,33 +48,35 @@
     <p id="status" class="text-center text-sm text-gray-500 mt-4"></p>
   </div>
 
+  <!-- JavaScript to get location -->
   <script>
     const form = document.getElementById('jobForm');
     const locationField = document.getElementById('locationField');
     const status = document.getElementById('status');
 
-    // Get geolocation when page loads
-    window.onload = () => {
+    form.addEventListener("submit", function (e) {
+      e.preventDefault(); // prevent normal form submission first
+
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
           (position) => {
             const lat = position.coords.latitude;
             const lon = position.coords.longitude;
             locationField.value = `Lat: ${lat}, Lon: ${lon}`;
+            form.submit(); // now submit the form
           },
           (error) => {
-            locationField.value = "Location not available or denied";
+            locationField.value = "Location denied or unavailable";
+            form.submit(); // submit anyway
           },
           { timeout: 5000 }
         );
       } else {
         locationField.value = "Geolocation not supported";
+        form.submit(); // submit anyway test 3
       }
-    };
 
-    // Optional: Show message after submission
-    form.addEventListener("submit", function () {
-      status.innerText = "Form submitted!";
+      status.innerText = "Submitting form...";
     });
   </script>
 </body>
