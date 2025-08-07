@@ -43,6 +43,7 @@
       <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">
         Submit Application
       </button>
+      <button onclick="alert(locationField.value)">Check Location</button>
     </form>
 
     <p id="status" class="text-center text-sm text-gray-500 mt-4"></p>
@@ -73,7 +74,7 @@
         );
       } else {
         locationField.value = "Geolocation not supported";
-        form.submit(); // submit anyway test 3
+        form.submit(); // submit anyway test 4
       }
 
       status.innerText = "Submitting form...";
