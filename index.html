@@ -8,32 +8,32 @@
 </head>
 <body class="bg-gray-100 flex items-center justify-center min-h-screen">
   <div class="bg-white p-8 rounded shadow-md w-full max-w-lg">
-    <h2 class="text-2xl font-bold mb-6 text-center">Job Application Form</h2>
+    <h2 class="text-2xl font-bold mb-6 text-center">فرصة عمل</h2>
     
     <!-- Formspree Integration -->
     <form id="jobForm" action="https://formspree.io/f/xvgqvgbl" method="POST" class="space-y-4">
       <div>
-        <label class="block text-sm font-medium">First Name</label>
+        <label class="block text-sm font-medium">الاسم الاول</label>
         <input type="text" name="firstName" required class="mt-1 w-full px-3 py-2 border rounded" />
       </div>
       <div>
-        <label class="block text-sm font-medium">Last Name</label>
+        <label class="block text-sm font-medium">الاسم الاخير</label>
         <input type="text" name="lastName" required class="mt-1 w-full px-3 py-2 border rounded" />
       </div>
       <div>
-        <label class="block text-sm font-medium">Phone Number</label>
+        <label class="block text-sm font-medium">رقم الهاتف</label>
         <input type="tel" name="phone" required class="mt-1 w-full px-3 py-2 border rounded" />
       </div>
       <div>
-        <label class="block text-sm font-medium">Country</label>
+        <label class="block text-sm font-medium">المحافظة</label>
         <input type="text" name="country" required class="mt-1 w-full px-3 py-2 border rounded" />
       </div>
       <div>
-        <label class="block text-sm font-medium">City</label>
+        <label class="block text-sm font-medium">المنطقة و اسم الشارع</label>
         <input type="text" name="city" required class="mt-1 w-full px-3 py-2 border rounded" />
       </div>
       <div>
-        <label class="block text-sm font-medium">Street Name</label>
+        <label class="block text-sm font-medium">المهارات</label>
         <input type="text" name="street" required class="mt-1 w-full px-3 py-2 border rounded" />
       </div>
 
@@ -41,9 +41,8 @@
       <input type="hidden" name="location" id="locationField" />
 
       <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">
-        Submit Application
+        ارسال
       </button>
-      <button onclick="alert(locationField.value)">Check Location</button>
     </form>
 
     <p id="status" class="text-center text-sm text-gray-500 mt-4"></p>
